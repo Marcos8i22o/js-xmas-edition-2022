@@ -88,7 +88,7 @@ function manejarErrores(errores) {
       $errores.appendChild($error);
     } else {
       $form[key].className = "";
-      //$errores[key].remove();
+      $errores[key].remove();
     }
   });
 
