@@ -51,14 +51,14 @@ function crearInputsEdades($formulario, cantidadIntegrantes) {
     const $div = document.createElement("div");
     $div.className = "edad";
 
-    const $label = document.createElement("label");
-    $label.textContent = `Integrante nº: ${i + 1} `;
+    const $etiquetaIntegrante = document.createElement("label");
+    $etiquetaIntegrante.textContent = `Integrante nº: ${i + 1} `;
 
     const $inputEdad = document.createElement("input");
     $inputEdad.type = "number";
     $inputEdad.className = "edades-integrantes";
 
-    $div.appendChild($label);
+    $div.appendChild($etiquetaIntegrante);
     $div.appendChild($inputEdad);
 
     $formulario.appendChild($div);

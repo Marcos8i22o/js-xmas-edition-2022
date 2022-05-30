@@ -1,12 +1,8 @@
 function probarValidarCantidadIntegrantes () {
-    console.assert(
-        validarCantidadIntegrantes(-1) === "Ingrese un número válido",
-        "Validar cantidadIntegrantes no validó que se haya ingresado un número válido",
-    )
 
     console.assert(
-        validarCantidadIntegrantes("") === "Ingrese un número",
-        "Validar cantidadIntegrantes no validó que se haya ingresado un número"
+        validarCantidadIntegrantes(/^[1-9]+$/.test ("")) === "Ingrese un número válido",
+        "Validar cantidadIntegrantes no validó que el número sea válido",
     )
 
     console.assert(

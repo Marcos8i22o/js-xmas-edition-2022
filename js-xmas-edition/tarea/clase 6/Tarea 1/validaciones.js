@@ -1,11 +1,12 @@
 function validarCantidadIntegrantes(cantidadIntegrantes) {
-    if(cantidadIntegrantes < 0) {
+    const esValido = /^[1-9]+$/.test(cantidadIntegrantes);
+
+    if(!esValido){
         return "Ingrese un número válido";
-    }else if (cantidadIntegrantes === ""){
-        return "Ingrese un número";
     }else{
-        return ""
+        return "";
     }
+    
 }
 
 function validarEdades(nodeListEdades){
