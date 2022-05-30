@@ -1,0 +1,17 @@
+body {
+    background-color: rgb(201, 201, 87);
+}
+
+button {
+    color: rgb(110, 50, 29);
+    background-color: lightblue ;
+}
+
+label {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    color: darkblue;
+}
+
+div {
+    color: brown;
+}
