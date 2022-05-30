@@ -72,11 +72,15 @@ $botonAceptar.onclick = function() {
 
 $botonCalcular.onclick = function() {
     const nodeListEdades = document.querySelectorAll('.edades-integrantes');
-    const mayorEdad = calcularMayorEdad(nodeListEdades);
-    const menorEdad = calcularMenorEdad(nodeListEdades);
-    const promedioEdades = calcularPromedioEdades(nodeListEdades);
+    const resultados = {};
+
+    resultados.mayorEdad = calcularMayorEdad(nodeListEdades);
+    resultados.menorEdad = calcularMenorEdad(nodeListEdades);
+    resultados.promedioEdades = calcularPromedioEdades(nodeListEdades);
     
-    mostrarResultados(mayorEdad,menorEdad,promedioEdades,$resultados);
+    validarEdades(nodeListEdades);
+
+    mostrarResultados(resultados,$resultados);
 }
 
 $botonResetear.onclick = function(){
@@ -120,16 +124,16 @@ function calcularPromedioEdades (edades) {
     return acumulador / edades.length;
 }
 
-function mostrarResultados(mayor,menor,prom,$resultados){
+function mostrarResultados(resultados,$resultados){
     const $menorIntegrante = document.querySelector('#menor-integrante');
     const $mayorIntegrante = document.querySelector('#mayor-integrante');
     const $edadPromedio = document.querySelector('#edad-promedio');
 
     $resultados.style.display = "";
 
-    $menorIntegrante.textContent = `El menor de la familia tiene: ${menor} años`;
-    $mayorIntegrante.textContent = `El mayor de la familia tiene: ${mayor} años`;
-    $edadPromedio.textContent = `El promedio de edades es: ${prom} años`;
+    $menorIntegrante.textContent = `El menor de la familia tiene: ${resultados.menorEdad} años`;
+    $mayorIntegrante.textContent = `El mayor de la familia tiene: ${resultados.mayorEdad} años`;
+    $edadPromedio.textContent = `El promedio de edades es: ${resultados.promedioEdades} años`;
 }
 
 function resetear ($resultados) {
