@@ -10,6 +10,9 @@ const $formulario = document.querySelector("form");
 const $botonCalcular = document.querySelector("#calcular");
 const $totalIntegrantes = document.querySelector("#total-integrantes");
 
+const errores = {};
+
+
 crearInputCantidadIntegrantes($formulario, $totalIntegrantes);
 crearBotonAceptar($formulario);
 
@@ -66,8 +69,22 @@ $botonAceptar.onclick = function () {
   const cantidadIntegrantes = Number(
     document.querySelector("#cantidad-de-integrantes").value
   );
-  validarCantidadIntegrantes(cantidadIntegrantes);
-  crearInputsEdades($formulario, cantidadIntegrantes);
+  const $errores = document.querySelector('#errores');
+
+  errores.errorCantidadIntegrantes = validarCantidadIntegrantes(cantidadIntegrantes);
+
+  if(errores.errorCantidadIntegrantes === ""){
+    crearInputsEdades($formulario, cantidadIntegrantes);
+  }else{
+    const $cantidadIntegrantes = document.querySelector('#cantidad-de-integrantes');
+    $cantidadIntegrantes.className = "error"; 
+
+    const $errorIntegrantes = document.createElement('li');
+    $errorIntegrantes.textContent = errores.errorCantidadIntegrantes;
+
+    $errores.appendChild($errorIntegrantes);
+  }
+  
 };
 
 $botonCalcular.onclick = function () {
