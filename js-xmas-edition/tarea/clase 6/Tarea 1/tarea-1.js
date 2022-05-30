@@ -66,6 +66,7 @@ function crearInputsEdades($formulario,cantidadIntegrantes){
 
 $botonAceptar.onclick = function() {
     const cantidadIntegrantes = Number(document.querySelector('#cantidad-de-integrantes').value);
+    validarCantidadIntegrantes(cantidadIntegrantes);
     crearInputsEdades($formulario,cantidadIntegrantes);
 }
 
