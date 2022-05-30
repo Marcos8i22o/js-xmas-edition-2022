@@ -5,3 +5,15 @@ function validarCantidadIntegrantes(cantidadIntegrantes) {
         return ""
     }
 }
+
+function validarEdades(nodeListEdades){
+    let resultado = "";
+
+    nodeListEdades.forEach(function(edad){
+        if(Number(edad.value) < 1){
+            resultado = "Ingrese una edad válida";
+        }
+    })
+
+    return resultado; 
+}
