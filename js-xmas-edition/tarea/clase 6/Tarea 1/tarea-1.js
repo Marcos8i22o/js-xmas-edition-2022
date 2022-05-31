@@ -12,13 +12,13 @@ const $totalIntegrantes = document.querySelector("#total-integrantes");
 
 const errores = {};
 
-
 crearInputCantidadIntegrantes($formulario, $totalIntegrantes);
 crearBotonAceptar($formulario);
 
 const $botonAceptar = document.querySelector("#boton-aceptar");
 const $botonResetear = document.querySelector("#boton-resetear");
 const $resultados = document.querySelector("#resultados");
+const $errores = document.querySelector("#errores");
 
 function crearInputCantidadIntegrantes($formulario, $totalIntegrantes) {
   const $label = document.createElement("label");
@@ -69,22 +69,24 @@ $botonAceptar.onclick = function () {
   const cantidadIntegrantes = Number(
     document.querySelector("#cantidad-de-integrantes").value
   );
-  const $errores = document.querySelector('#errores');
 
-  errores.errorCantidadIntegrantes = validarCantidadIntegrantes(cantidadIntegrantes);
+  errores.errorCantidadIntegrantes =
+    validarCantidadIntegrantes(cantidadIntegrantes);
+  const $cantidadIntegrantes = document.querySelector(
+    "#cantidad-de-integrantes"
+  );
 
-  if(errores.errorCantidadIntegrantes === ""){
+
+  const esExito = manejarErrores(errores) === false;
+
+  if (esExito) {
     crearInputsEdades($formulario, cantidadIntegrantes);
-  }else{
-    const $cantidadIntegrantes = document.querySelector('#cantidad-de-integrantes');
-    $cantidadIntegrantes.className = "error"; 
-
-    const $errorIntegrantes = document.createElement('li');
-    $errorIntegrantes.textContent = errores.errorCantidadIntegrantes;
-
-    $errores.appendChild($errorIntegrantes);
+    $cantidadIntegrantes.className = "";
+    borrarErrores();
+  } else {
+    $cantidadIntegrantes.className = "error";
   }
-  
+
 };
 
 $botonCalcular.onclick = function () {
@@ -95,13 +97,17 @@ $botonCalcular.onclick = function () {
   resultados.menorEdad = calcularMenorEdad(nodeListEdades);
   resultados.promedioEdades = calcularPromedioEdades(nodeListEdades);
 
-  validarEdades(nodeListEdades);
-
-  mostrarResultados(resultados, $resultados);
+  borrarErrores();
+  errores.errorEdades = validarEdades(nodeListEdades);
+  if (errores.errorEdades === "") {
+    mostrarResultados(resultados, $resultados);
+  } else {
+    manejarErrores(errores)
+  }
 };
 
 $botonResetear.onclick = function () {
-  resetear($resultados);
+  resetear();
 };
 
 function calcularMayorEdad(edades) {
@@ -154,13 +160,74 @@ function mostrarResultados(resultados, $resultados) {
   $edadPromedio.textContent = `El promedio de edades es: ${resultados.promedioEdades} años`;
 }
 
-function resetear($resultados) {
+function resetear() {
+
+  borrarResultados();
+  borrarCantidadIntegrantes();
+  borrarIntegrantes();
+  borrarErrores();
+  borrarBordeInput();
+
+}
+
+function borrarErrores() {
+  const $errores = document.querySelectorAll('li');
+
+  $errores.forEach(function(error){
+    error.remove();
+  })
+
+}
+
+function borrarCantidadIntegrantes(){
+  document.querySelector("#cantidad-de-integrantes").value = "";
+}
+
+function borrarIntegrantes(){
   const nodeListDivsEdades = document.querySelectorAll(".edad");
 
   for (let i = 0; i < nodeListDivsEdades.length; i++) {
     nodeListDivsEdades[i].remove();
   }
+}
 
-  $resultados.remove();
-  document.querySelector("#cantidad-de-integrantes").value = "";
+function borrarResultados(){
+ const $resultados = document.querySelectorAll('em');
+ const $lineasDivisorias = document.querySelectorAll('hr');
+
+ for(let i = 0; i < $resultados.length; i++){
+   $resultados[i].remove()
+   $lineasDivisorias[i].remove();
+ }
+ 
+}
+
+
+
+function borrarBordeInput(){
+  const inputs = document.querySelectorAll('input');
+  inputs.forEach(function(input){
+    input.className = "";
+  })
+}
+
+function manejarErrores(errores) {
+  let hayError = false;
+
+  const keys = Object.keys(errores);
+  keys.forEach(function (key) {
+    const error = errores[key];
+
+    if (error) {
+      borrarErrores();
+      const $error = document.createElement("li");
+      $error.textContent = error;
+
+      $errores.appendChild($error);
+      
+      hayError = true;
+    }
+  });
+  
+  return hayError;
 }
