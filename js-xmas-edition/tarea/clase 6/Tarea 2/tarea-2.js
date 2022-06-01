@@ -27,12 +27,12 @@ $botonQuitarIntegrante.onclick = function(){
 }
 
 
-
-
 $botonCalcular.onclick = function(){
     const nodeListSalarios = document.querySelectorAll('.sueldos-anuales');
     const salarios = {};
     
+    validarSalarios(nodeListSalarios);
+
     salarios.mayorSalarioAnual = calcularMayorSalario(nodeListSalarios);
     salarios.menorSalarioAnual = calcularMenorSalario(nodeListSalarios);
     salarios.salarioAnualPromedio = calcularSalarioAnualPromedio(nodeListSalarios);
@@ -122,4 +122,14 @@ function mostrarResultados(salarios){
     $menorSalarioAnual.textContent = `El menor salario anual es de: ${salarios.menorSalarioAnual}`;
     $salarioAnualPromedio.textContent = `El salario anual promedio es de: ${salarios.salarioAnualPromedio}`;
     $salarioMensualPromedio.textContent = `El salario mensual promedio es de: ${salarios.salarioMensualPromedio}`;
+}
+
+function validarSalarios(salarios){
+
+    for(let i = 0; i < salarios.length; i++){
+        if(Number(salarios[i].value) < 0){
+            return "Ingrese un salario válido";
+        }
+    }
+
 }
