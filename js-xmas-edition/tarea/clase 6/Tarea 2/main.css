@@ -15,3 +15,7 @@ label {
 div {
     color: brown;
 }
+
+.error {
+    border: solid 2px red;
+}
