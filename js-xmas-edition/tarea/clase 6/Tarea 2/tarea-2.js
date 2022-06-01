@@ -31,12 +31,14 @@ $botonQuitarIntegrante.onclick = function(){
 
 $botonCalcular.onclick = function(){
     const nodeListSalarios = document.querySelectorAll('.sueldos-anuales');
+    const salarios = {};
     
-    const mayorSalarioAnual = calcularMayorSalario(nodeListSalarios);
-    const menorSalarioAnual = calcularMenorSalario(nodeListSalarios);
-    const salarioAnualPromedio = calcularSalarioAnualPromedio(nodeListSalarios);
-    const salarioMensualPromedio = calcularSalarioMensualPromedio(nodeListSalarios);
-    mostrarResultados(mayorSalarioAnual,menorSalarioAnual,salarioAnualPromedio,salarioMensualPromedio);
+    salarios.mayorSalarioAnual = calcularMayorSalario(nodeListSalarios);
+    salarios.menorSalarioAnual = calcularMenorSalario(nodeListSalarios);
+    salarios.salarioAnualPromedio = calcularSalarioAnualPromedio(nodeListSalarios);
+    salarios.salarioMensualPromedio = calcularSalarioMensualPromedio(nodeListSalarios);
+    
+    mostrarResultados(salarios);
 }
 
 function agregarIntegrante(){
@@ -104,22 +106,22 @@ function calcularSalarioMensualPromedio(salarios){
     for(let i = 0; i < salarios.length; i++){
         let salarioMensual = Number(salarios[i].value) 
         if (salarioMensual !== ""){
-            salarioMensual / MESES_EN_EL_ANIO;
-            acumulador += salarioMensual;
+            const resultado = salarioMensual / MESES_EN_EL_ANIO;
+            acumulador += resultado;
         }
     }
 
     return acumulador / salarios.length;
 }
 
-function mostrarResultados(mayorAnual,menorAnual,anualPromedio,mensualPromedio){
+function mostrarResultados(salarios){
     const $mayorSalarioAnual = document.querySelector('#mayor-salario-anual');
     const $menorSalarioAnual = document.querySelector('#menor-salario-anual');
     const $salarioAnualPromedio = document.querySelector('#salario-anual-promedio');
     const $salarioMensualPromedio = document.querySelector('#salario-mensual-promedio');
 
-    $mayorSalarioAnual.textContent = `El mayor salario anual es de: ${mayorAnual}`;
-    $menorSalarioAnual.textContent = `El menor salario anual es de: ${menorAnual}`;
-    $salarioAnualPromedio.textContent = `El salario anual promedio es de: ${anualPromedio}`;
-    $salarioMensualPromedio.textContent = `El salario mensual promedio es de: ${mensualPromedio}`;
+    $mayorSalarioAnual.textContent = `El mayor salario anual es de: ${salarios.mayorSalarioAnual}`;
+    $menorSalarioAnual.textContent = `El menor salario anual es de: ${salarios.menorSalarioAnual}`;
+    $salarioAnualPromedio.textContent = `El salario anual promedio es de: ${salarios.salarioAnualPromedio}`;
+    $salarioMensualPromedio.textContent = `El salario mensual promedio es de: ${salarios.salarioMensualPromedio}`;
 }
