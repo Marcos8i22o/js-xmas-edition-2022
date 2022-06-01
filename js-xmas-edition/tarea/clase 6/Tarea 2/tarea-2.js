@@ -59,43 +59,41 @@ function agregarIntegrante(){
 }
 
 function calcularMayorSalario(salarios){
-    let maximo = Number(salarios[0].value);
+    let maximo = 0;
 
-    for(let i = 1; i < salarios.length; i++){
-        let salario = Number(salarios[i].value);
-        
-        if(salario > maximo && salario !== ""){
-            maximo = salario;
+    salarios.forEach(function(salario) {
+        const salarioIntegrante = Number(salario.value);
+        if(salarioIntegrante > maximo && salarioIntegrante !== ""){
+            maximo = salarioIntegrante;
         }
-    }
-
+    });
+   
     return maximo;
 }
 
 function calcularMenorSalario(salarios){
-    let minimo = Number(salarios[0].value);
+    let minimo = Infinity;
 
-    for(let i = 1; i < salarios.length; i++){
-        let salario = Number(salarios[i].value);
-        
-        if(salario < minimo && salario !== ""){
-            minimo = salario;
+    salarios.forEach(function(salario){
+        const salarioIntegrante = Number(salario.value);
+        if(salarioIntegrante < minimo && salario !== ""){
+            minimo = salarioIntegrante;
         }
-    }
-
+    })
+    
     return minimo;
 }
 
 function calcularSalarioAnualPromedio(salarios){
     let acumulador = 0;
 
-    for(let i = 0; i < salarios.length; i++){
-        let salario = Number(salarios[i].value);
-        if (salario !== ""){
-            acumulador += salario;
+    salarios.forEach(function(salario){
+        const salarioIntegrante = Number(salario.value);
+        if(salarioIntegrante !== ""){
+            acumulador += salarioIntegrante;
         }
-    }
-
+    })
+  
     return acumulador / salarios.length;
 }
 
@@ -103,14 +101,14 @@ function calcularSalarioMensualPromedio(salarios){
     const MESES_EN_EL_ANIO = 12;
     let acumulador = 0;
 
-    for(let i = 0; i < salarios.length; i++){
-        let salarioMensual = Number(salarios[i].value) 
-        if (salarioMensual !== ""){
-            const resultado = salarioMensual / MESES_EN_EL_ANIO;
+    salarios.forEach(function(salario){
+        const salarioIntegrante = Number(salario.value);
+        if(salarioIntegrante !== ""){
+            const resultado = salarioIntegrante / MESES_EN_EL_ANIO;
             acumulador += resultado;
         }
-    }
-
+    })
+    
     return acumulador / salarios.length;
 }
 
