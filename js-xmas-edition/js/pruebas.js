@@ -10,8 +10,6 @@ function probarValidarNombre() {
       'Este campo debe tener menos de 50 caracteres',
       'Validar nombre no validó que el nombre sea menor a 50 caracteres',
   );
-<<<<<<< Updated upstream
-=======
 
   console.assert(
       validarNombre("@") === "Este campo debe contener sólo caracteres válidos",
@@ -57,7 +55,6 @@ function probarValidarDescripcionRegalo(){
         validarDescripcionRegalo("regalo") === "",
         'Validar descripción regalo falló al ingresar texto válido',
     )
->>>>>>> Stashed changes
 }
 
 probarValidarNombre();

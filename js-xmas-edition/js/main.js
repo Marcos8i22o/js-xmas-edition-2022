@@ -1,5 +1,3 @@
-<<<<<<< Updated upstream
-=======
 function validarNombre(nombre) {
   if (nombre === "") {
     return "Este campo debe tener al menos 1 caracter";
@@ -43,6 +41,7 @@ function validarDescripcionRegalo(descripcionRegalo) {
 }
 
 function validarFormulario(event) {
+
   const $form = document.querySelector("#carta-a-santa");
 
   const nombre = $form.nombre.value;
@@ -70,25 +69,31 @@ function validarFormulario(event) {
 }
 
 function manejarErrores(errores) {
+  
   const keys = Object.keys(errores);
   const $errores = document.querySelector("#errores");
-
+  
   let cantidadErrores = 0;
+
+  $errores.innerHTML = "";
 
   keys.forEach(function (key) {
     const error = errores[key];
+    
 
     if (error) {
       $form[key].className = "error";
       cantidadErrores++;
-
+      
       const $error = document.createElement("li");
       $error.innerText = error;
-
+      
       $errores.appendChild($error);
+      
     } else {
+      
       $form[key].className = "";
-      //$errores[key].remove();
+      
     }
   });
 
@@ -105,6 +110,6 @@ function redireccionarPagina() {
 }
 
 
+
 const $form = document.querySelector("#carta-a-santa");
 $form.onsubmit = validarFormulario;
->>>>>>> Stashed changes
