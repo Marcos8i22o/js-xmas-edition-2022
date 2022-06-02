@@ -69,12 +69,12 @@ function agregarIntegrante(){
 }
 
 function calcularMayorSalario(salarios){
-    let maximo = 0;
+    let salarioMaximo = 0;
 
     salarios.forEach(function(salario) {
         const salarioIntegrante = Number(salario.value);
         if(salarioIntegrante > maximo && salarioIntegrante !== ""){
-            maximo = salarioIntegrante;
+            salarioMaximo = salarioIntegrante;
         }
     });
    
@@ -82,12 +82,12 @@ function calcularMayorSalario(salarios){
 }
 
 function calcularMenorSalario(salarios){
-    let minimo = Infinity;
+    let salarioMinimo = Infinity;
 
     salarios.forEach(function(salario){
         const salarioIntegrante = Number(salario.value);
         if(salarioIntegrante < minimo && salario !== ""){
-            minimo = salarioIntegrante;
+            salarioMinimo = salarioIntegrante;
         }
     })
     
