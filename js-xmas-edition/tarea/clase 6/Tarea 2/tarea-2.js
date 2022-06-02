@@ -31,14 +31,24 @@ $botonCalcular.onclick = function(){
     const nodeListSalarios = document.querySelectorAll('.sueldos-anuales');
     const salarios = {};
     
-    validarSalarios(nodeListSalarios);
+    const error = validarSalarios(nodeListSalarios);
 
-    salarios.mayorSalarioAnual = calcularMayorSalario(nodeListSalarios);
-    salarios.menorSalarioAnual = calcularMenorSalario(nodeListSalarios);
-    salarios.salarioAnualPromedio = calcularSalarioAnualPromedio(nodeListSalarios);
-    salarios.salarioMensualPromedio = calcularSalarioMensualPromedio(nodeListSalarios);
+    if(!error){
+        salarios.mayorSalarioAnual = calcularMayorSalario(nodeListSalarios);
+        salarios.menorSalarioAnual = calcularMenorSalario(nodeListSalarios);
+        salarios.salarioAnualPromedio = calcularSalarioAnualPromedio(nodeListSalarios);
+        salarios.salarioMensualPromedio = calcularSalarioMensualPromedio(nodeListSalarios);
     
-    mostrarResultados(salarios);
+        mostrarResultados(salarios);
+    }else{
+        const $errores = document.querySelector('#errores');
+        
+        const $error = document.createElement('li');
+        $error.textContent = error;
+
+        $errores.appendChild($error);
+
+    }
 }
 
 function agregarIntegrante(){
@@ -125,11 +135,13 @@ function mostrarResultados(salarios){
 }
 
 function validarSalarios(salarios){
-
+    let resultado = "";
     for(let i = 0; i < salarios.length; i++){
         if(Number(salarios[i].value) < 0){
-            return "Ingrese un salario válido";
+            salarios[i].className = "error";
+            resultado = "Ingrese un salario válido";
         }
     }
-
+    
+    return resultado;
 }
